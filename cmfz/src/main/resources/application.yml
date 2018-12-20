@@ -1,9 +1,10 @@
 server:
   port: 8989
-  context-path: /zhong
-  jsp-servlet:
-    init-parameters:
-      development: true
+  servlet:
+    context-path: /zhong
+    jsp:
+      init-parameters:
+        development: true
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
@@ -18,3 +19,8 @@ spring:
 mybatis:
   type-aliases-package: com.baizhi.wsf.entity
   mapper-locations: classpath:com/baizhi/wsf/mapper/*Mapper.xml
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql

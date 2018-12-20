@@ -18,15 +18,13 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/login")
-@Log4j
+
 public class AdminController {
     @Autowired
     private AdminService adminService;
 
     @RequestMapping("/login")
     public String login(Admin admin) {
-        log.info(12345);
-        log.info(admin.toString());
         String status = adminService.getOne(admin);
         return status;
     }

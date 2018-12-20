@@ -9,6 +9,11 @@
     <script type="text/javascript" src="../js/jquery.min.js"></script>
     <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
     <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript" src="../js/datagrid-detailview.js"></script>
+    <script type="text/javascript" src="../js/jquery.edatagrid.js"></script>
+    <script type="text/javascript" src="../js/jquery.etree.js"></script>
+
+
     <script type="text/javascript">
         <!--菜单处理-->
         $(function () {
@@ -17,19 +22,39 @@
                 dataType: "json",
                 url: '/zhong/test/test',
                 success: function (data) {
-                    $.each(data, function (i, n) {// 加载父类节点及一级菜单
+                    $.each(data, function (i, n) {
+                        var a = "";
+                        $.each(n.list, function (index1, second) {
+                            a += "<p style='text-align: center'><a id=\"btn\" href=\"#\" class=\"easyui-linkbutton\" onclick=\"addTabs('" + second.title + "','" + second.iconCls + "','" + second.url + "')\" data-options=\"iconCls:''\">" + second.title + "</a></p>";
+                        })
                         $('#aa').accordion('add', {
                             title: n.title,
                             iconCls: n.iconCls,
-                            onSelect: function () {
-                                alert(1234)
-                            }
+                            content: a,
+                            selected: false
                         });
                     });
                 }
             });
 
         })
+
+        function addTabs(title, iconCls, url) {
+            var a = $("#tt").tabs("exists", title)
+            if (a) {
+                $("#tt").tabs("select", title)
+            } else {
+                $('#tt').tabs('add', {
+                    title: title,
+                    iconCls: "icon-cog_add",
+                    href: "${pageContext.request.contextPath}/" + url,
+                    selected: true,
+                    closable: true
+
+                });
+            }
+        }
+
     </script>
 
 </head>
@@ -60,4 +85,5 @@
     </div>
 </div>
 </body>
+<table id="dg"></table>
 </html>

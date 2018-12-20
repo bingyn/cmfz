@@ -18,14 +18,14 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/test")
-@Log4j
+
 public class MenuController {
     @Autowired
     private MenuService menuService;
 
     @RequestMapping("/test")
     public List<Menu> list_all() {
-        log.info(menuService.list_all());
+
         return menuService.list_all();
     }
 }
